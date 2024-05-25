@@ -1,0 +1,14 @@
+void qsort(std::vector<int>& a, int l, int r) {
+    if (l >= r) return; // 기저 조건: l이 r보다 크거나 같으면 함수 종료
+    int p = a[r]; // 피벗(pivot) 선택: 오른쪽 끝 요소 선택
+    int i = l - 1; // i를 l-1로 초기화
+    
+    for (int j = l; j < r; ++j) { // l부터 r-1까지 반복
+        if (a[j] < p) // 현재 요소가 피벗보다 작으면
+            std::swap(a[++i], a[j]); // i를 증가시키고 현재 요소와 교환
+    }
+    std::swap(a[++i], a[r]); // 피벗을 올바른 위치로 이동
+    
+    qsort(a, l, i - 1); // 피벗 기준 왼쪽 부분 정렬
+    qsort(a, i + 1, r); // 피벗 기준 오른쪽 부분 정렬
+}

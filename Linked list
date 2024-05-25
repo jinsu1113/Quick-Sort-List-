@@ -1,0 +1,59 @@
+#include <iostream>
+
+// 노드 구조체 정의
+struct Node {
+    int data; // 노드의 데이터
+    Node* next; // 다음 노드를 가리키는 포인터
+
+    Node(int d) : data(d), next(nullptr) {} // 노드 생성자
+};
+
+// 단일 연결 리스트 클래스 정의
+class LinkedList {
+    Node* head; // 리스트의 첫 번째 노드를 가리키는 포인터
+
+public:
+    // 생성자: 리스트 초기화
+    LinkedList() : head(nullptr) {}
+
+    // 노드를 리스트에 추가
+    void add(int d) {
+        Node* n = new Node(d);
+        if (!head) { // 리스트가 비어있는 경우
+            head = n;
+        } else { // 리스트가 비어있지 않은 경우
+            Node* t = head;
+            while (t->next) t = t->next;
+            t->next = n;
+        }
+    }
+
+    // 리스트 출력
+    void print() {
+        Node* t = head;
+        while (t) {
+            std::cout << t->data << " ";
+            t = t->next;
+        }
+        std::cout << std::endl;
+    }
+
+    // 소멸자: 리스트의 모든 노드를 삭제하여 메모리 해제
+    ~LinkedList() {
+        while (head) {
+            Node* t = head;
+            head = head->next;
+            delete t;
+        }
+    }
+};
+
+// 메인 함수
+int main() {
+    LinkedList list; // 연결 리스트 객체 생성
+    list.add(1); // 노드 추가
+    list.add(2); // 노드 추가
+    list.add(3); // 노드 추가
+    list.print(); // 리스트 출력
+    return 0;
+}

@@ -28,7 +28,7 @@ public:
         }
     }
 
-    // 리스트 출력
+    // 리스트 출력ㅗ
     void print() {
         Node* t = head;
         while (t) {
